@@ -50,13 +50,13 @@ time.sleep(3)
 driver.execute_script("window.scrollTo(0, 900)")
 
 select2 = Select(driver.find_element_by_css_selector('select[name=sel_subj]'))
-select2.select_by_visible_text('Mathematics-FD')
+select2.select_by_visible_text('Mathematics-FD')  # 원하는 class명 검색
 
 xpath6 = "/html/body/div[3]/form/input[17]"
 submit_course = driver.find_element_by_xpath(xpath6)
 submit_course.click()
 
-xpath7 = "/html/body/div[3]/table[2]/tbody/tr[5]/td[3]/form/input[30]"
+xpath7 = "/html/body/div[3]/table[2]/tbody/tr[5]/td[3]/form/input[30]"  # class level 선택
 submit_courseLevel = driver.find_element_by_xpath(xpath7)
 submit_courseLevel.click()
 
@@ -64,18 +64,22 @@ time.sleep(2)
 
 driver.execute_script("window.scrollTo(0, 900)")
 
-seats = driver.find_element_by_xpath('/html/body/div[3]/form/table/tbody/tr[3]/td[13]')
+seats = driver.find_element_by_xpath('/html/body/div[3]/form/table/tbody/tr[3]/td[13]')  # 원하는 class 의 remaining seat or waitlist spot 
 howmany = seats.text
 
 # while howmany == '0':
 #     print('seats not available')
 #     driver.refresh()
-#     time.sleep(2)
+#     time.sleep(300)
 #     driver.switch_to.window(driver.window_handles[1])
-#     print(howmany)
+#     자리가 나올때까지 5분 간격으로 새로고침
 
+
+print("Seat available, sending alert message through telegram")
 bot = telegram.Bot('1729976271:AAGXV-JOryhi4TUtapm7xb0Hf0RmhhFA3DU')
 bot.send_message('@textmagicme33','Math1c course now available')
+
+# 자리가 나오면 텔레그램 메세지로 알림
 
 
 
